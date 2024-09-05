@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)file:///C:/Users/markm/activesubscribers_202408171605.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+table {border: medium solid #6495ed;border-collapse: collapse;width: 100%;} th{font-family: monospace;border: thin solid #6495ed;padding: 5px;background-color: #D0E3FA;}th{text-align: left;}td{font-family: sans-serif;border: thin solid #6495ed;padding: 5px;text-align: center;}.odd{background:#e8edff;}img{padding:5px; border:solid; border-color: #dddddd #aaaaaa #aaaaaa #dddddd; border-width: 1px 2px 2px 1px; background-color:white;}</style>
+<style type="text/css" id="operaUserStyle"></style></head>
+<body>
+<table><tbody><tr><th colspan="6"><pre><code>WITH ActiveSubscribers AS (<br>    SELECT <br>        G.DATE_ACT AS ActivationDate,<br>        G.SUB_ID,<br>        T.PP_NAME AS CurrentTariffPlan,<br>        S.SERVICE_NAME AS CurrentService,<br>        SUB.COMPANY_NAME,<br>        COUNT(*) OVER (PARTITION BY SUB.COMPANY_NAME) AS ActiveVoiceSubscribers<br>    FROM <br>        GROSS G<br>    JOIN <br>        TARIFF T ON G.SUB_ID = T.SUB_ID AND T.PP_END_DATE = '2999-01-01 00:00:00'<br>    JOIN <br>        SERVICE S ON G.SUB_ID = S.SUB_ID AND S.SERVICE_STOP_DATE = '2999-01-01 00:00:00'<br>    JOIN <br>        SUBSCRIBER SUB ON G.SUB_ID = SUB.SUB_ID<br>    WHERE <br>        G.DATE_ACT BETWEEN '2023-12-01' AND '2023-12-31'<br>        AND G.REACTIVATION = 0<br>        AND SUB.CUSTOMER_TYPE = 'Business'<br>        AND T.PP_NAME IN ('Бизнес-план', 'Бизнес-план 1.0', 'Бизнес-план 2.0', 'Бизнес-план 3.0', 'Бизнес-план 4.0')<br>        AND S.SERVICE_NAME IN ('Безлимитный интернет 512', 'Безлимитный интернет 1', 'Безлимитный интернет 2')<br>)<br>SELECT <br>    ActivationDate,<br>    SUB_ID,<br>    CurrentTariffPlan,<br>    CurrentService,<br>    COMPANY_NAME,<br>    ActiveVoiceSubscribers<br>FROM <br>    ActiveSubscribers</code></pre></th></tr><tr><th>activationdate</th><th>sub_id</th><th>currenttariffplan</th><th>currentservice</th><th>company_name</th><th>activevoicesubscribers</th></tr><tr class="odd"><td>2023-12-01</td><td>1</td><td>Бизнес-план</td><td>Безлимитный интернет 512</td><td>Компания А</td><td>1</td></tr>
+<tr><td>2023-12-02</td><td>2</td><td>Бизнес-план 1.0</td><td>Безлимитный интернет 1</td><td>Компания Б</td><td>1</td></tr>
+<tr class="odd"><td>2023-12-03</td><td>3</td><td>Бизнес-план 2.0</td><td>Безлимитный интернет 2</td><td>Компания В</td><td>1</td></tr>
+<tr><td>2023-12-04</td><td>4</td><td>Бизнес-план 3.0</td><td>Безлимитный интернет 512</td><td>Компания Г</td><td>1</td></tr>
+<tr class="odd"><td>2023-12-05</td><td>5</td><td>Бизнес-план 4.0</td><td>Безлимитный интернет 1</td><td>Компания Д</td><td>1</td></tr>
+<tr><td>2023-12-06</td><td>6</td><td>Бизнес-план</td><td>Безлимитный интернет 2</td><td>Компания Е</td><td>1</td></tr>
+<tr class="odd"><td>2023-12-07</td><td>7</td><td>Бизнес-план 1.0</td><td>Безлимитный интернет 512</td><td>Компания Ж</td><td>1</td></tr>
+<tr><td>2023-12-08</td><td>8</td><td>Бизнес-план 2.0</td><td>Безлимитный интернет 1</td><td>Компания З</td><td>1</td></tr>
+<tr class="odd"><td>2023-12-09</td><td>9</td><td>Бизнес-план 3.0</td><td>Безлимитный интернет 2</td><td>Компания И</td><td>1</td></tr>
+<tr><td>2023-12-10</td><td>10</td><td>Бизнес-план 4.0</td><td>Безлимитный интернет 512</td><td>Компания К</td><td>1</td></tr>
+<tr class="odd"><td>2023-12-11</td><td>11</td><td>Бизнес-план</td><td>Безлимитный интернет 1</td><td>Компания Л</td><td>1</td></tr>
+<tr><td>2023-12-12</td><td>12</td><td>Бизнес-план 1.0</td><td>Безлимитный интернет 2</td><td>Компания М</td><td>1</td></tr>
+<tr class="odd"><td>2023-12-13</td><td>13</td><td>Бизнес-план 2.0</td><td>Безлимитный интернет 512</td><td>Компания Н</td><td>1</td></tr>
+<tr><td>2023-12-14</td><td>14</td><td>Бизнес-план 3.0</td><td>Безлимитный интернет 1</td><td>Компания О</td><td>1</td></tr>
+<tr class="odd"><td>2023-12-15</td><td>15</td><td>Бизнес-план 4.0</td><td>Безлимитный интернет 2</td><td>Компания П</td><td>1</td></tr>
+</tbody></table></body></html>
